@@ -7,7 +7,7 @@
             <div class="box">
                 <section class="content-header">
                     <h1 class=" col-xs-12 text-center">
-                        <strong class="text-uppercase">Vistoria</strong> - <em>Editar</em>
+                        <strong class="text-uppercase">Vistoria</strong> - <em>Enviar Fotos</em>
                     </h1>
                 </section>
                 <hr class="col-xs-12" />
@@ -54,21 +54,7 @@
                     echo '</div>';
 
 
-                    echo ' <div class="form-group">';
-                    $renavam = (isset($vistorias['renavam'])) ? $vistorias['renavam'] : '';
-                    $opts = array('name' => 'renavam', 'value' => $renavam, 'title' => 'Infome seu CPF', 'id' => "id_renavam");
-                    echo form_label('Renavam do Veículo:');
-                    echo '<p>' . $renavam . '</p>';
-                    echo '</div>';
-
-
-                    echo ' <div class="form-group">';
-                    $chassi = (isset($vistorias['chassi'])) ? $vistorias['chassi'] : '';
-                    $opts = array('name' => 'chassi', 'value' => $chassi, 'title' => 'Infome seu CPF', 'id' => "id_chassi");
-                    echo form_label('Chassi do Veículo:');
-                    echo '<p>' . $chassi . '</p>';
-                    echo '</div>';
-
+                    $solic = (isset($vistorias['status_vistoria_name'])) ? $vistorias['status_vistoria_name'] : " ";
 
                     echo '<div class="row">';
                     echo '<div class="col-xs-12">';
@@ -77,22 +63,10 @@
                     echo '<div class="col-xs-12 ">';
                     echo form_label('Situação da Visstoria:');
                     echo '</div>';
-                    echo '<div class="col-xs-12 ">';
-                    $status_vistoria_name = array(
-                        LABEL_CONFIRMADO => LABEL_CONFIRMADO,
-                        LABEL_SOLICITADO => LABEL_SOLICITADO,
-                        LABEL_NEGADO => LABEL_NEGADO
-
-
-
-
-                    );
-                    $selected = ($this->input->post('status_vistoria_name')) ? $this->input->post('status_vistoria_name') : LABEL_NAO_SOLICITADO;
-                    $opts = array('autocomplete' => 'off', 'name' => 'status_vistoria_name', 'value' => $selected, 'title' => 'Tipo de Usuário', 'class' => 'form-control editorhtml col');
-                    echo form_dropdown($opts, $status_vistoria_name, $selected);
+                    echo '<p class="col-xs-12 "> <strong> ' . $solic  . ' </strong> </p>';
                     echo '</div>';
                     echo '</div>';
-                    echo '</div>';
+
 
 
                     // ===============================================================
@@ -104,7 +78,8 @@
                             <div class="col-xs-12">
                                 <div class="input-group">
                                     <div class="custom-file row">
-                                        <label class="col-xs-12 custom-file-label" for="imgFormInput1">Imagem 1: Frente do veículo</label>
+                                        <label class="col-xs-12 custom-file-label" for="img1">Imagem 1: Frente do veículo</label>
+                                        <input id="img1" class="col-xs-12" type="file" name="img1" size="20">
                                     </div>
                                 </div>
                             </div>
@@ -112,8 +87,6 @@
                                 <figure class="col-xs-12">
                                     <img src="<?php echo base_url('uploads/') . $img1; ?>" style="width:100px; height:100px;" />
                                 </figure>
-                            <?php } else { ?>
-                                <p class="col-xs-12"><strong>Aguardando..</strong> Imagem não enviada</p>
                             <?php } ?>
                         </div>
                     </div>
@@ -128,7 +101,8 @@
                             <div class="col-xs-12">
                                 <div class="input-group">
                                     <div class="custom-file row">
-                                        <label class="col-xs-12 custom-file-label" for="imgFormInput2">Imagem 2: Costas do veículo</label>
+                                        <label class="col-xs-12 custom-file-label" for="img2">Imagem 2: Costas do veículo</label>
+                                        <input id="img2" class="col-xs-12" type="file" name="img2" size="20">
                                     </div>
                                 </div>
                             </div>
@@ -136,9 +110,6 @@
                                 <figure class="col-xs-12">
                                     <img src="<?php echo base_url('uploads/') . $img2; ?>" style="width:100px; height:100px;" />
                                 </figure>
-                            
-                            <?php } else { ?>
-                                <p class="col-xs-12"><strong>Aguardando..</strong> Imagem não enviada</p>
                             <?php } ?>
                         </div>
                     </div>
@@ -154,7 +125,8 @@
                             <div class="col-xs-12">
                                 <div class="input-group">
                                     <div class="custom-file row">
-                                        <label class="col-xs-12 custom-file-label" for="imgFormInput3">Imagem 3: Lado esquerdo do veículo</label>
+                                        <label class="col-xs-12 custom-file-label" for="img3">Imagem 3: Lado esquerdo do veículo</label>
+                                        <input id="img3" class="col-xs-12" type="file" name="img3" size="20">
                                     </div>
                                 </div>
                             </div>
@@ -162,9 +134,6 @@
                                 <figure class="col-xs-12">
                                     <img src="<?php echo base_url('uploads/') . $img3; ?>" style="width:100px; height:100px;" />
                                 </figure>
-                            
-                            <?php } else { ?>
-                                <p class="col-xs-12"><strong>Aguardando..</strong> Imagem não enviada</p>
                             <?php } ?>
                         </div>
                     </div>
@@ -180,7 +149,8 @@
                             <div class="col-xs-12">
                                 <div class="input-group">
                                     <div class="custom-file row">
-                                        <label class="col-xs-12 custom-file-label" for="imgFormInput4">Imagem 4: Lado direito do veículo</label>
+                                        <label class="col-xs-12 custom-file-label" for="img4">Imagem 4: Lado direito do veículo</label>
+                                        <input id="img4" class="col-xs-12" type="file" name="img4" size="20">
                                     </div>
                                 </div>
                             </div>
@@ -188,13 +158,12 @@
                                 <figure class="col-xs-12">
                                     <img src="<?php echo base_url('uploads/') . $img4; ?>" style="width:100px; height:100px;" />
                                 </figure>
-                            
-                            <?php } else { ?>
-                                <p class="col-xs-12"><strong>Aguardando..</strong> Imagem não enviada</p>
                             <?php } ?>
                         </div>
                     </div>
                     <?php
+
+
 
                     echo form_submit('enviar', 'Salvar', array('class' => 'btn btn-success pull-right'));
 

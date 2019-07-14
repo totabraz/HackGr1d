@@ -58,7 +58,7 @@ class Vistoria extends CI_Controller
             $dados_insert["status_vistoria_name"] = $dados_form['status_vistoria_name'];
             $dados['vistoria']['status_vistoria_name'] = $dados_insert['status_vistoria_name'];
 
-            if ($this->vistoria->salvar($dados_insert)) {
+            if ($this->vistoria->save($dados_insert)) {
                 getMsgOk('Dados atualizados.');
             } else {
                 $msg = getMsgInfo('Ops! Algo aconteceu! Mesmo conteúdo?');
@@ -100,8 +100,8 @@ class Vistoria extends CI_Controller
         $dados_insert["ID"] = $idVistoria;
         $dados_insert["status_vistoria_name"] = LABEL_SOLICITADO;
         $dados_insert["status_vistoria_value"] = VALUE_SOLICITADO;
-        // salvar no banco
-        if ($id = $this->vistoria->salvar($dados_insert)) {
+        // save no banco
+        if ($id = $this->vistoria->save($dados_insert)) {
             set_msg(getMsgOk('Apólice cadastrado!'));
             redirect('corretor/vistoria/listar', 'refresh');
         } else {
@@ -137,8 +137,8 @@ class Vistoria extends CI_Controller
             $dados_insert["chassi"] = $dados_form['chassi'];
             $dados_insert["status_vistoria_name"] = $dados_form['status_vistoria_name'];
             $dados_insert["status_vistoria_value"] = getValueStatus($dados_form['status_vistoria_name']);
-            // salvar no banco
-            if ($id = $this->vistoria->salvar($dados_insert)) {
+            // save no banco
+            if ($id = $this->vistoria->save($dados_insert)) {
                 set_msg(getMsgOk('Apólice cadastrado!'));
                 if (isset($dados_form['addmore']) && $dados_form['addmore']) {
                     redirect('corretor/vistoria/cadastrar', 'refresh');

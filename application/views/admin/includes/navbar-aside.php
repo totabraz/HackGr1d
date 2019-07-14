@@ -28,6 +28,7 @@ if (!isset($permission_value)) $permission_value = 2;
 
 $nav_users = false;
 $nav_vistorias  = false;
+$nav_vistorias_cliente = false;
 $nav_apolices  = false;
 
 switch ($permission_value) {
@@ -41,7 +42,7 @@ switch ($permission_value) {
         break;
 
     default:
-        $nav_vistorias = true;
+        $nav_vistorias_cliente = true;
         break;
 }
 
@@ -61,7 +62,8 @@ switch ($permission_value) {
             </div>
             <div class="pull-left info">
                 <p><?php echo  $name ?></p>
-                <p><small><i class="fa fa-circle text-success"></i>&nbsp;<?php echo "Tipo usuário: " . $permission_name; ?></small></p>
+                <p><small><small>CPF:</small><?php echo " " . $cpf; ?></p>
+                <p><small><?php echo "Tipo usuário: " . $permission_name; ?></small></p>
             </div>
         </div>
 
@@ -126,8 +128,29 @@ switch ($permission_value) {
                     </a>
                     <?php $display = ($menuActiveSplited == 'users') ? 'block' : 'block'; ?>
                     <ul class="treeview-menu " style="display:<?php echo $display ?>">
-                        <li><a href="<?php echo base_url('corretor/vistoria/cadastrar'); ?>"><i class="fa fa-circle<?php if ($menuActive == 'corretor/vistoria/create') echo " "; ?>-o"></i>&nbsp;Cadastrar</a></li>
                         <li><a href="<?php echo base_url('corretor/vistoria/listar'); ?>"><i class="fa fa-circle<?php if ($menuActive == 'corretor/vistoria/list') echo " "; ?>-o"></i>&nbsp;Listar</a></li>
+                    </ul>
+                </li>
+            </ul>
+        <?php } ?>
+
+
+        <!-- MENU VISTORIAS -->
+        <?php if ($nav_vistorias_cliente) { ?>
+            <ul class="sidebar-menu">
+                <li class="header">MENU VISTORIAS</li>
+            </ul>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="treeview menu-open">
+                    <a href="#">
+                        <i class="fa fa-car"></i>&nbsp;<span>Vistorias</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <?php $display = ($menuActiveSplited == 'users') ? 'block' : 'block'; ?>
+                    <ul class="treeview-menu " style="display:<?php echo $display ?>">
+                        <li><a href="<?php echo base_url('cliente/vistoria/listar'); ?>"><i class="fa fa-circle<?php if ($menuActive == 'cliente/vistoria/list') echo " "; ?>-o"></i>&nbsp;Listar</a></li>
                     </ul>
                 </li>
             </ul>

@@ -75,7 +75,6 @@ if (!function_exists('globalLogout')) {
 }
 
 
-
 if (!function_exists('verificaLogin')) {
     function verificaLogin($redirect = 'login')
     {
@@ -123,7 +122,7 @@ if (!function_exists('config_upload_doc')) {
 }
 
 if (!function_exists('config_upload_img')) {
-    function config_upload_img($path = './uploads', $types = 'png|jpg|jpeg|PNG|JPG|JPEG', $size = 3240)
+    function config_upload_img($path = './uploads', $types = 'png|jpg|jpeg|PNG|JPG|JPEG', $size = 10240)
     {
         $config['upload_path'] = $path;
         $config['allowed_types'] = $types;

@@ -9,7 +9,7 @@ class Vistoria_model extends CI_Model
         parent::__construct();
     }
 
-    public function salvar($dados)
+    public function save($dados)
     {
         $dados =  (array) $dados;
         if (isset($dados['ID']) && $dados['ID'] > 0) {
@@ -30,6 +30,25 @@ class Vistoria_model extends CI_Model
         $this->db->order_by($sort, $order);
         if ($limit)
             $this->db->limit($limit, $offset);
+        $query = $this->db->get($this->table);
+        if ($query->num_rows() > 0) {
+            $result = $query->result();
+            for ($i = 0; $i < sizeof($result); $i++) {
+                $result[$i]->password = '';
+            }
+            return $result;
+        } else {
+            return NULL;
+        }
+    }
+
+
+
+    public function getAllByCpfCliente($cpf = NULL, $sort = 'status_vistoria_value', $limit = NULL, $offset = NULL, $order = 'asc')
+    {
+        $this->db->order_by($sort, $order);
+        if ($limit) $this->db->limit($limit, $offset);
+        $this->db->where('cpf_cliente', $cpf);
         $query = $this->db->get($this->table);
         if ($query->num_rows() > 0) {
             $result = $query->result();
