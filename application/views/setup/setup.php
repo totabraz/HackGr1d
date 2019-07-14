@@ -53,7 +53,7 @@
                                 echo '</div>';
 
 
-                                echo form_submit('enviar', 'Registrar', array('class' => 'btn btn-outline-info pull-right'));
+                                echo form_submit('enviar', 'Registrar', array('class' => 'btn btn-info pull-right'));
                                 // Form Closed
                                 echo form_close();
                                 ?>

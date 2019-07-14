@@ -68,6 +68,9 @@ $route['root/meuperfil']                     = 'root/root/myprofile';
 
 
 
+$route['login']              	        = 'login/login';
+$route['logout']              	        = 'login/logout';
+
 
 
 // # =================================== ADMIN =================================== 

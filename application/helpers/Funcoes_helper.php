@@ -64,7 +64,7 @@ if (!function_exists('getMsgInfo')) {
 
 
 if (!function_exists('globalLogout')) {
-    function globalLogout($redirect = 'admin/login')
+    function globalLogout($redirect = 'login')
     {
         // Destroy os dados da sessão
         setSessionnOff();
@@ -77,7 +77,7 @@ if (!function_exists('globalLogout')) {
 
 
 if (!function_exists('verificaLogin')) {
-    function verificaLogin($redirect = 'admin/login')
+    function verificaLogin($redirect = 'login')
     {
         $ci = &get_instance();
         if ($ci->session->userdata('logged') != TRUE) {
@@ -89,7 +89,7 @@ if (!function_exists('verificaLogin')) {
 
 
 if (!function_exists('verificaLoginAdmin')) {
-    function verificaLoginAdmin($redirect = 'admin/login')
+    function verificaLoginAdmin($redirect = 'login')
     {
         $ci = &get_instance();
         if (($ci->session->userdata('logged') != TRUE) && (
@@ -206,13 +206,10 @@ if (!function_exists('setSessionnOn')) {
         $ci = &get_instance();
         $ci->load->library('session');
         // Getting  values
-        $login = (isset($user->login)) ? $user->login : '';
-        $email = (isset($user->email)) ? $user->email : '';
-        $fist_name = (isset($user->fist_name)) ? $user->fist_name : '';
+        $login = (isset($user->cpf)) ? $user->cpf : '';
         // Setting values
         $ci->session->set_userdata('logged', TRUE);
-        $ci->session->set_userdata('login', $login);
-        $ci->session->set_userdata('email', $email);
+        $ci->session->set_userdata('cpf', $cpf);
         $ci->session->set_userdata('name', $fist_name);
     }
 }

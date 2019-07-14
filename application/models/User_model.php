@@ -91,6 +91,32 @@ class User_model extends CI_Model
         }
     }
 
+    public function getUserByCPFAndPermissionName($cpf = NULL, $permission_name = NULL, $id = 0)
+    {
+        $return = NULL;
+        if (isset($cpf) && isset($permission_name)) {
+            $cpf = safeInput($cpf);
+            $permission_name = safeInput($permission_name);
+            $this->db->where('cpf', $cpf);
+            $this->db->where('permission_name', $permission_name);
+            $query = $this->db->get($this->table, 1);
+            if ($query->num_rows() == 1) {
+                $row = $query->row();
+                $return = $row;
+            }
+        }
+
+        if ($id > 0 && is_null($return)) {
+            $this->db->where('ID', $id);
+            $query = $this->db->get($this->table, 1);
+            if ($query->num_rows() == 1) {
+                $row = $query->row();
+                $return = $row;
+            }
+        }
+        // printInfoDump($return);
+        return $return;
+    }
     public function getUserByCPF($cpf = NULL)
     {
         return $this->getUser($cpf);
@@ -103,7 +129,7 @@ class User_model extends CI_Model
     {
         $return = NULL;
         if (isset($cpf)) {
-            safeInput($cpf);
+            $cpf = safeInput($cpf);
             $this->db->where('cpf', $cpf);
             $query = $this->db->get($this->table, 1);
             if ($query->num_rows() == 1) {
@@ -111,7 +137,8 @@ class User_model extends CI_Model
                 $return = $row;
             }
         }
-        
+
+
         if ($id > 0 && is_null($return)) {
             $this->db->where('ID', $id);
             $query = $this->db->get($this->table, 1);

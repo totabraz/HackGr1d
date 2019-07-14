@@ -7,12 +7,12 @@ $permission = 0;
 
 
 if (isset($this->session->userdata)) {
-    $user = $this->session->userdata;
-    $login = $user['login'];
-    $email = $user['email'];
-    $name = $user['name'];
-    $permission_name = $user['permission_name'];
-    $permission_value = $user['permission_value'];
+    $user = isset($this->session->userdata)? $this->session->userdata : "";
+    $cpf = isset($user['cpf'])? $user['cpf'] : "";
+    $email = isset($user['email'])? $user['email'] : "";
+    $cpf = isset($user['cpf'])? $user['cpf'] : "";
+    $permission_name = isset($user['permission_name'])? $user['permission_name'] : "";
+    $permission_value = isset($user['permission_value'])? $user['permission_value'] : "";
 } else {
     header("location: " . base_url() . "admin/login");
 }
@@ -73,19 +73,20 @@ switch ($permission_value) {
         <ul class="sidebar-menu">
             <li class=" menu-open">
                 <a href="#">
-                    <i class="fa fa-globe"></i>&nbsp;<span>Site público</span>
+                    <i class="fa fa-globe"></i>&nbsp;<span>Público</span>
                 </a>
                 <?php $display = ($menuActiveSplited == 'casamento') ? 'block' : 'block'; ?>
                 <ul class="treeview-menu " style="display:<?php echo $display ?>">
                     <li>
                         <a href="<?php echo base_url() ?>" target="_blunk"><i class="fa fa-external-link"></i>&nbsp;Ver site</a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url('logout') ?>" target="_blunk"><i class="fa fa-sign-out"></i>&nbsp;Sair</a>
+                    </li>
+                   
                 </ul>
             </li>
         </ul>
-
-
-
 
 
 
