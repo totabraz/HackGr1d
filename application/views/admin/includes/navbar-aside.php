@@ -5,14 +5,13 @@ $name = "";
 $permission_name = "";
 $permission = 0;
 
-
 if (isset($this->session->userdata)) {
-    $user = isset($this->session->userdata)? $this->session->userdata : "";
-    $cpf = isset($user['cpf'])? $user['cpf'] : "";
-    $email = isset($user['email'])? $user['email'] : "";
-    $cpf = isset($user['cpf'])? $user['cpf'] : "";
-    $permission_name = isset($user['permission_name'])? $user['permission_name'] : "";
-    $permission_value = isset($user['permission_value'])? $user['permission_value'] : "";
+    $user = isset($this->session->userdata) ? $this->session->userdata : "";
+    $cpf = isset($user['cpf']) ? $user['cpf'] : "";
+    $email = isset($user['email']) ? $user['email'] : "";
+    $cpf = isset($user['cpf']) ? $user['cpf'] : "";
+    $permission_name = isset($user['permission_name']) ? $user['permission_name'] : "";
+    $permission_value = isset($user['permission_value']) ? $user['permission_value'] : "";
 } else {
     header("location: " . base_url() . "admin/login");
 }
@@ -23,7 +22,6 @@ if (isset($menuActive)) {
 } else {
     $menuActive = ' ';
 }
-
 $display = 'block';
 
 if (!isset($permission_value)) $permission_value = 2;
@@ -38,7 +36,7 @@ switch ($permission_value) {
         break;
 
     case PERMISSION_CORRETOR:
-        $$nav_vistorias = true;
+        $nav_vistorias = true;
         $nav_apolices = true;
         break;
 
@@ -78,24 +76,20 @@ switch ($permission_value) {
                 <?php $display = ($menuActiveSplited == 'casamento') ? 'block' : 'block'; ?>
                 <ul class="treeview-menu " style="display:<?php echo $display ?>">
                     <li>
-                        <a href="<?php echo base_url() ?>" target="_blunk"><i class="fa fa-external-link"></i>&nbsp;Ver site</a>
-                    </li>
-                    <li>
                         <a href="<?php echo base_url('logout') ?>" target="_blunk"><i class="fa fa-sign-out"></i>&nbsp;Sair</a>
                     </li>
-                   
+
                 </ul>
             </li>
         </ul>
 
 
 
-        <ul class="sidebar-menu">
-            <li class="header">MENU ADMIN</li>
-        </ul>
-
         <!-- MENU USERS -->
         <?php if ($nav_users) { ?>
+            <ul class="sidebar-menu">
+                <li class="header">MENU ADMIN</li>
+            </ul>
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="treeview menu-open">
                     <a href="#">
@@ -108,6 +102,32 @@ switch ($permission_value) {
                     <ul class="treeview-menu " style="display:<?php echo $display ?>">
                         <li><a href="<?php echo base_url('root/cadastrar'); ?>"><i class="fa fa-circle<?php if ($menuActive == 'root/create') echo " "; ?>-o"></i>&nbsp;Cadastrar</a></li>
                         <li><a href="<?php echo base_url('root/listar'); ?>"><i class="fa fa-circle<?php if ($menuActive == 'root/list') echo " "; ?>-o"></i>&nbsp;Listar</a></li>
+                    </ul>
+                </li>
+            </ul>
+        <?php } ?>
+
+
+
+
+
+        <!-- MENU VISTORIAS -->
+        <?php if ($nav_vistorias) { ?>
+            <ul class="sidebar-menu">
+                <li class="header">MENU VISTORIAS</li>
+            </ul>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="treeview menu-open">
+                    <a href="#">
+                        <i class="fa fa-car"></i>&nbsp;<span>Vistorias</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <?php $display = ($menuActiveSplited == 'users') ? 'block' : 'block'; ?>
+                    <ul class="treeview-menu " style="display:<?php echo $display ?>">
+                        <li><a href="<?php echo base_url('corretor/vistoria/cadastrar'); ?>"><i class="fa fa-circle<?php if ($menuActive == 'corretor/vistoria/create') echo " "; ?>-o"></i>&nbsp;Cadastrar</a></li>
+                        <li><a href="<?php echo base_url('corretor/vistoria/listar'); ?>"><i class="fa fa-circle<?php if ($menuActive == 'corretor/vistoria/list') echo " "; ?>-o"></i>&nbsp;Listar</a></li>
                     </ul>
                 </li>
             </ul>

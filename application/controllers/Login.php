@@ -25,9 +25,23 @@ class Login extends CI_Controller
 
     public function login()
     {
+        if (($this->session->userdata('logged') == TRUE)) {
+            switch ($this->session->userdata('permission_name')) {
+                case LABEL_CLIENTE:
+                    redirect('cliente/home', 'refresh');
+                    break;
+                case LABEL_CORRETOR:
+                    redirect('corretor/home', 'refresh');
+                    break;
+                case LABEL_ROOT:
+                    redirect('root/home', 'refresh');
+                    break;
+            }
+        }
         if ($this->option->get_option('setup_executado') != 1) {
             redirect('instalar', 'refresh');
         } else {
+
             $this->form_validation->set_rules('cpf', 'Usuário', 'trim|required|min_length[4]');
             $this->form_validation->set_rules('permission_name', 'Categoria de Usuário', 'trim|required');
             $this->form_validation->set_rules('password', 'Senha', 'trim|required|min_length[8]');
@@ -63,10 +77,9 @@ class Login extends CI_Controller
 
                                 default:
                                     set_msg(getMsgError("Erro desconhecido no login"));
-                                    redirect('login', 'refresh');
+                                    // redirect('login', 'refresh');
                                     break;
                             }
-                            
                         } else {
                             set_msg(getMsgError('CPF e/ou Senha estão errados! :('));
                         }

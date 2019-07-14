@@ -55,16 +55,32 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['setup']  					                = 'setup/setup';
 $route['setup/install']  					        = 'setup/setup/install';
+$route['instalar']         					        = 'setup/setup/install';
 
 $route['root']  					                = 'root/root';
 $route['root/home']  					            = 'root/root/list';
 
 
-$route['root/listar']              	        = 'root/root/list';
-$route['root/cadastrar']                     = 'root/root/create';
-$route['root/blocker/:num']                  = 'root/root/blocker';
-$route['root/editar/:num']                     = 'root/root/edit';
-$route['root/meuperfil']                     = 'root/root/myprofile';
+$route['root/listar']              	                 = 'root/root/list';
+$route['root/cadastrar']                             = 'root/root/create';
+$route['root/blocker/:num']                          = 'root/root/blocker';
+$route['root/editar/:num']                           = 'root/root/edit';
+
+
+$route['corretor/home']              	                        = 'corretor/vistoria/list';
+$route['corretor/vistoria/listar']              	            = 'corretor/vistoria/list';
+$route['corretor/vistoria/cadastrar']                           = 'corretor/vistoria/create';
+$route['corretor/vistoria/editar/:num']                         = 'corretor/vistoria/edit';
+$route['corretor/vistoria/solicitarvalidacao/:num']             = 'corretor/vistoria/solicitarvalidacao';
+
+
+$route['cliente/home']              	                        = 'cliente/vistoria/list';
+$route['cliente/vistoria/listar']              	                = 'cliente/vistoria/list';
+$route['cliente/vistoria/cadastrar']                           = 'cliente/vistoria/create';
+$route['cliente/vistoria/editar/:num']                         = 'cliente/vistoria/edit';
+$route['cliente/vistoria/solicitarvalidacao/:num']             = 'cliente/vistoria/solicitarvalidacao';
+
+
 
 
 

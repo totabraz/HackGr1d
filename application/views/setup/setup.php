@@ -9,16 +9,14 @@
                 <hr class="" />
                 <!-- /.box -->
                 <div class="box-body">
-                    <?php if ($msg = get_msg()) echo $msg; ?>
                     <div class="">
                         <div class="card">
                             <div class="card-body">
+                                <?php if ($msg = get_msg()) echo $msg; ?>
+
                                 <?php
                                 $setup = array('class' => 'form-control', 'trim|required');
 
-                                if ($msg = get_msg()) {
-                                    echo $msg;
-                                }
 
                                 echo form_open();
 
@@ -36,7 +34,7 @@
 
                                 echo ' <div class="form-group">';
                                 $form_name = (isset($user['name'])) ? $user['name'] : '';
-                                $opts = array('name' => 'name', 'value' => $form_name, 'title' => 'Infome seu Nome', 'id'=>'name_form');
+                                $opts = array('name' => 'name', 'value' => $form_name, 'title' => 'Infome seu Nome', 'id' => 'name_form');
                                 echo form_label('Nome:');
                                 echo form_input($opts, '', $setup);
                                 echo '</div>';

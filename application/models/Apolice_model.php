@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class User_model extends CI_Model
+class Apolice_model extends CI_Model
 {
-    var $table = 'users';
+    var $table = 'apolices';
     function __construct()
     {
         parent::__construct();
@@ -13,13 +13,13 @@ class User_model extends CI_Model
     {
         $dados =  (array) $dados;
         if (isset($dados['ID']) && $dados['ID'] > 0) {
-            // User já existe. Devo editar
+            // Apolice já existe. Devo editar
             $this->db->where('ID', $dados['ID']);
             unset($dados['ID']);
             $this->db->update($this->table, $dados);
             return $this->db->affected_rows();
         } else {
-            // User não existe. Devo editar
+            // Apolice não existe. Devo editar
             $this->db->insert($this->table, $dados);
             return $this->db->insert_id();
         }
@@ -43,7 +43,8 @@ class User_model extends CI_Model
     }
 
 
-    public function excluirUser($id = 0)
+
+    public function excluirApolice($id = 0)
     {
         $this->db->where('ID', $id);
         $this->db->delete($this->table);
@@ -51,11 +52,11 @@ class User_model extends CI_Model
     }
 
 
-    public function getMyUserInfo()
+    public function getMyApoliceInfo()
     {
         $ci = &get_instance();
         $ci->load->library('session');
-        if (isset($this->session->userdata['cpf'])) $cpf = $this->session->userdata['cpf'];
+        if (isset($this->session->apolicedata['cpf'])) $cpf = $this->session->apolicedata['cpf'];
         if (isset($cpf)) {
             $this->db->where('cpf', $cpf);
             $query = $this->db->get($this->table, 1);
@@ -68,55 +69,49 @@ class User_model extends CI_Model
         }
     }
 
-    public function getUserByCPFAndPermissionName($cpf = NULL, $permission_name = NULL, $id = 0)
+   
+    public function getApoliceByCpfCliente($cpf_cliente = NULL)
+    {
+        return $this->getApolice($cpf_cliente);
+    }
+    public function getApoliceByCpfCorretor($cpf_corretor = NULL )
+    {
+        return $this->getApolice(NULL, $cpf_corretor);
+    }
+    public function getApoliceById($id = 0)
+    {
+        return $this->getApolice(NULL, NULL, $id);
+    }
+    private function getApolice($cpf_cliente = NULL, $cpf_corretor = NULL,  $id = 0)
     {
         $return = NULL;
-        if (isset($cpf) && isset($permission_name)) {
-            $cpf = safeInput($cpf);
-            $permission_name = safeInput($permission_name);
-            $this->db->where('cpf', $cpf);
-            $this->db->where('permission_name', $permission_name);
+        if (isset($cpf_cliente) && isset($cpf_corretor)) {
+            $cpf_cliente = safeInput($cpf_cliente);
+            $cpf_corretor = safeInput($cpf_corretor);
+            $this->db->where('cpf_cliente', $cpf_cliente);
+            $this->db->where('cpf_corretor', $cpf_corretor);
             $query = $this->db->get($this->table, 1);
             if ($query->num_rows() == 1) {
                 $row = $query->row();
                 $return = $row;
             }
-        }
-
-        if ($id > 0 && is_null($return)) {
-            $this->db->where('ID', $id);
+        } else if (isset($cpf_cliente)) {
+            $cpf_cliente = safeInput($cpf_cliente);
+            $this->db->where('cpf_cliente', $cpf_cliente);
             $query = $this->db->get($this->table, 1);
             if ($query->num_rows() == 1) {
                 $row = $query->row();
                 $return = $row;
             }
-        }
-        // printInfoDump($return);
-        return $return;
-    }
-    public function getUserByCPF($cpf = NULL)
-    {
-        return $this->getUser($cpf);
-    }
-    public function getUserById($id = 0)
-    {
-        return $this->getUser(NULL, $id);
-    }
-    private function getUser($cpf = NULL,  $id = 0)
-    {
-        $return = NULL;
-        if (isset($cpf)) {
-            $cpf = safeInput($cpf);
-            $this->db->where('cpf', $cpf);
+        } else if (isset($cpf_corretor)) {
+            $cpf_corretor = safeInput($cpf_corretor);
+            $this->db->where('cpf_corretor', $cpf_corretor);
             $query = $this->db->get($this->table, 1);
             if ($query->num_rows() == 1) {
                 $row = $query->row();
                 $return = $row;
             }
-        }
-
-
-        if ($id > 0 && is_null($return)) {
+        } else if ($id > 0 && is_null($return)) {
             $this->db->where('ID', $id);
             $query = $this->db->get($this->table, 1);
             if ($query->num_rows() == 1) {

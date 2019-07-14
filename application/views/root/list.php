@@ -24,7 +24,7 @@
                                 <tr>
                                     <th>Nome</th>
                                     <th>Login</th>
-                                    
+
                                     <th>Tipo Usuário</th>
                                     <th>Ações</th>
                                 </tr>
@@ -35,18 +35,16 @@
                                 <?php foreach ($users as $user) { ?>
                                     <?php if ($index) { } ?>
                                     <tr class="">
-                                        <td><?php if (isset($user->name)) echo $user->name ?></td>
-                                        <td><?php if (isset($user->cpf)) echo $user->cpf ?></td>
-                                        <td><?php if (isset($user->permission_name)) echo $user->permission_name ?></td>
-
+                                        <td class="col-xs-4"><?php if (isset($user->name)) echo $user->name ?></td>
+                                        <td class="col-xs-4"><?php if (isset($user->cpf)) echo $user->cpf ?></td>
+                                        <td class="col-xs-4"><?php if (isset($user->permission_name)) echo $user->permission_name ?></td>
                                         <td>
                                             <?php if (isset($user->ID)) {
                                                 $userId = $user->ID;
-                                                
                                             } ?>
 
                                             <a href="<?php echo base_url('root/editar/' . $userId) ?>" class="btn btn-small btn-info" title="Editar">
-                                                <i class="fa fa-edit"></i>
+                                                Editar
                                             </a>
                                         </td>
                                     </tr>
@@ -60,6 +58,8 @@
                                 </tr>
                             </tfoot>
                         </table>
+                    <?php } else { ?>
+                        <p class="col-xs-12 text-center">Sem cadastro</p>
                     <?php } ?>
                 </div>
                 <!-- /.box-body -->

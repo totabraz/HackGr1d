@@ -29,6 +29,7 @@ class Setup extends CI_Controller
 
     public function install()
     {
+        $msg = '';
         // Regras de validação
         $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[5]');
         $this->form_validation->set_rules('name', 'Nome', 'trim|required|min_length[5]');
@@ -44,7 +45,7 @@ class Setup extends CI_Controller
             }
         } else {
             $user = NULL;
-            if ($user = $this->user->getUserByLogin($dados_form['login']));
+            if ($user = $this->user->getUserByCpf($dados_form['cpf']));
 
             if (($user === NULL) && (isset($dados_form['password']) && (isset($dados_form['password2']) && ($dados_form['password'] === $dados_form['password2'])))) {
                 $dados_insert["cpf"] = $dados_form['cpf'];
@@ -70,7 +71,7 @@ class Setup extends CI_Controller
                     $msg = getMsgError('Problemas ao cadastrar usuário!');
                 }
             } else if ($user !== NULL) {
-                $msg = getMsgError('CPF ou e-mail já cadastrado.. :(');
+                $msg = getMsgError('CPF já cadastrado.. :(');
             } else {
                 $msg = getMsgError('CPF já cadastrado!');
             }

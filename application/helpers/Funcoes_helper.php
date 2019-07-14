@@ -268,9 +268,9 @@ if (!function_exists('isRoot')) {
 }
 
 if (!function_exists('getPermissionValue')) {
-    function getPermissionValue($permissionLabel)
+    function getPermissionValue($permissionLabel  = PERMISSION_CLIENTE)
     {
-        $permission = PERMISSION_CLIENTE;
+
         switch ($permissionLabel) {
             case LABEL_ROOT:
                 $permission = PERMISSION_ROOT;
@@ -284,14 +284,6 @@ if (!function_exists('getPermissionValue')) {
                 $permission = PERMISSION_CLIENTE;
                 break;
 
-            case LABEL_SELLER:
-                $permission = PERMISSION_SELLER;
-                break;
-
-            case LABEL_VIEWER:
-                $permission = PERMISSION_CLIENTE;
-                break;
-
             default:
                 $permission = PERMISSION_CLIENTE;
                 break;
@@ -300,6 +292,34 @@ if (!function_exists('getPermissionValue')) {
     }
 }
 
+
+
+if (!function_exists('getValueStatus')) {
+    function getValueStatus($permissionLabel  = LABEL_NAO_SOLICITADO)
+    {
+        switch ($permissionLabel) {
+            case LABEL_ENVIADO:
+            return VALUE_ENVIADO;
+            break;
+            case LABEL_NAO_SOLICITADO:
+            return VALUE_NAO_SOLICITADO;
+            break;
+            case LABEL_SOLICITADO:
+            return VALUE_SOLICITADO;
+            break;
+            case LABEL_CONFIRMADO:
+            return VALUE_CONFIRMADO;
+            break;
+            case LABEL_NEGADO:
+            return VALUE_NEGADO;
+            break;
+            default:
+                $permission = VALUE_NAO_SOLICITADO;
+                break;
+        }
+        return $permission;
+    }
+}
 
 if (!function_exists('removeBasicWords')) {
     function removeBasicWords($word = '')

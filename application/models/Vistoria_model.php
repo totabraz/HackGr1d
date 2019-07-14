@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class User_model extends CI_Model
+class Vistoria_model extends CI_Model
 {
-    var $table = 'users';
+    var $table = 'vistorias';
     function __construct()
     {
         parent::__construct();
@@ -13,19 +13,19 @@ class User_model extends CI_Model
     {
         $dados =  (array) $dados;
         if (isset($dados['ID']) && $dados['ID'] > 0) {
-            // User já existe. Devo editar
+            // Vistoria já existe. Devo editar
             $this->db->where('ID', $dados['ID']);
             unset($dados['ID']);
             $this->db->update($this->table, $dados);
             return $this->db->affected_rows();
         } else {
-            // User não existe. Devo editar
+            // Vistoria não existe. Devo editar
             $this->db->insert($this->table, $dados);
             return $this->db->insert_id();
         }
     }
 
-    public function getAll($sort = 'ID', $limit = NULL, $offset = NULL, $order = 'asc')
+    public function getAll($sort = 'status_vistoria_value', $limit = NULL, $offset = NULL, $order = 'asc')
     {
         $this->db->order_by($sort, $order);
         if ($limit)
@@ -43,7 +43,8 @@ class User_model extends CI_Model
     }
 
 
-    public function excluirUser($id = 0)
+
+    public function excluirVistoria($id = 0)
     {
         $this->db->where('ID', $id);
         $this->db->delete($this->table);
@@ -51,72 +52,49 @@ class User_model extends CI_Model
     }
 
 
-    public function getMyUserInfo()
+   
+    public function getVistoriaByCpfCliente($cpf_cliente = NULL)
     {
-        $ci = &get_instance();
-        $ci->load->library('session');
-        if (isset($this->session->userdata['cpf'])) $cpf = $this->session->userdata['cpf'];
-        if (isset($cpf)) {
-            $this->db->where('cpf', $cpf);
-            $query = $this->db->get($this->table, 1);
-            if ($query->num_rows() == 1) {
-                $row = $query->row();
-                return $row;
-            } else {
-                return NULL;
-            }
-        }
+        return $this->getVistoria($cpf_cliente);
     }
-
-    public function getUserByCPFAndPermissionName($cpf = NULL, $permission_name = NULL, $id = 0)
+    public function getVistoriaByCpfCorretor($cpf_corretor = NULL )
+    {
+        return $this->getVistoria(NULL, $cpf_corretor);
+    }
+    public function getVistoriaById($id = 0)
+    {
+        return $this->getVistoria(NULL, NULL, $id);
+    }
+    private function getVistoria($cpf_cliente = NULL, $cpf_corretor = NULL,  $id = 0)
     {
         $return = NULL;
-        if (isset($cpf) && isset($permission_name)) {
-            $cpf = safeInput($cpf);
-            $permission_name = safeInput($permission_name);
-            $this->db->where('cpf', $cpf);
-            $this->db->where('permission_name', $permission_name);
+        if (isset($cpf_cliente) && isset($cpf_corretor)) {
+            $cpf_cliente = safeInput($cpf_cliente);
+            $cpf_corretor = safeInput($cpf_corretor);
+            $this->db->where('cpf_cliente', $cpf_cliente);
+            $this->db->where('cpf_corretor', $cpf_corretor);
             $query = $this->db->get($this->table, 1);
             if ($query->num_rows() == 1) {
                 $row = $query->row();
                 $return = $row;
             }
-        }
-
-        if ($id > 0 && is_null($return)) {
-            $this->db->where('ID', $id);
+        } else if (isset($cpf_cliente)) {
+            $cpf_cliente = safeInput($cpf_cliente);
+            $this->db->where('cpf_cliente', $cpf_cliente);
             $query = $this->db->get($this->table, 1);
             if ($query->num_rows() == 1) {
                 $row = $query->row();
                 $return = $row;
             }
-        }
-        // printInfoDump($return);
-        return $return;
-    }
-    public function getUserByCPF($cpf = NULL)
-    {
-        return $this->getUser($cpf);
-    }
-    public function getUserById($id = 0)
-    {
-        return $this->getUser(NULL, $id);
-    }
-    private function getUser($cpf = NULL,  $id = 0)
-    {
-        $return = NULL;
-        if (isset($cpf)) {
-            $cpf = safeInput($cpf);
-            $this->db->where('cpf', $cpf);
+        } else if (isset($cpf_corretor)) {
+            $cpf_corretor = safeInput($cpf_corretor);
+            $this->db->where('cpf_corretor', $cpf_corretor);
             $query = $this->db->get($this->table, 1);
             if ($query->num_rows() == 1) {
                 $row = $query->row();
                 $return = $row;
             }
-        }
-
-
-        if ($id > 0 && is_null($return)) {
+        } else if ($id > 0 && is_null($return)) {
             $this->db->where('ID', $id);
             $query = $this->db->get($this->table, 1);
             if ($query->num_rows() == 1) {

@@ -1,9 +1,49 @@
+<?php
+$login = "";
+$email = "";
+$name = "";
+$permission_name = "";
+$permission = 0;
+
+if (isset($this->session->userdata)) {
+    $user = isset($this->session->userdata) ? $this->session->userdata : "";
+    $cpf = isset($user['cpf']) ? $user['cpf'] : "";
+    $email = isset($user['email']) ? $user['email'] : "";
+    $cpf = isset($user['cpf']) ? $user['cpf'] : "";
+    $permission_name = isset($user['permission_name']) ? $user['permission_name'] : "";
+    $permission_value = isset($user['permission_value']) ? $user['permission_value'] : "";
+} else {
+    header("location: " . base_url() . "admin/login");
+}
+
+
+$link  = 'login';
+switch ($permission_name) {
+    case LABEL_ROOT:
+        $link = "root/home";
+        break;
+
+    case LABEL_CORRETOR:
+        $link = "corretor/home";
+        break;
+
+    case LABEL_CLIENTE:
+        $link = "cliente/home";
+        break;
+
+    default:
+        $link = "cliente";
+        break;
+}
+
+?>
+
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="<?php echo base_url('home') ?>" class="logo">
+            <a href="<?php echo base_url($link) ?>" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><strong>Gr1D</strong></span>
                 <!-- logo for regular state and mobile devices -->

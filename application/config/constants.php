@@ -103,6 +103,22 @@ defined('LABEL_CORRETOR')                 OR define('LABEL_CORRETOR', "CORRETOR"
 defined('PERMISSION_CLIENTE')            OR define('PERMISSION_CLIENTE', 11100);
 defined('LABEL_CLIENTE')                 OR define('LABEL_CLIENTE', "CLIENTE");
 
+defined('VALUE_ENVIADO')                    OR define('VALUE_ENVIADO', 11111);
+defined('LABEL_ENVIADO')                    OR define('LABEL_ENVIADO', "ENVIADO");
+
+defined('VALUE_NAO_SOLICITADO')             OR define('VALUE_NAO_SOLICITADO', 11110);
+defined('LABEL_NAO_SOLICITADO')             OR define('LABEL_NAO_SOLICITADO', "NÃO SOLICITADO");
+
+defined('VALUE_SOLICITADO')                 OR define('VALUE_SOLICITADO', 11100);
+defined('LABEL_SOLICITADO')                 OR define('LABEL_SOLICITADO', "SOLICITADO");
+
+defined('VALUE_CONFIRMADO')                 OR define('VALUE_CONFIRMADO', 11000);
+defined('LABEL_CONFIRMADO')                 OR define('LABEL_CONFIRMADO', "CONFIRMADO");
+
+defined('VALUE_NEGADO')                     OR define('VALUE_NEGADO', 1000);
+defined('LABEL_NEGADO')                     OR define('LABEL_NEGADO', "NEGADO");
+
+
 defined('SITE_NAME')                 OR define('SITE_NAME', "Gr1d");
 defined('SITE_SIGLA')                OR define('SITE_SIGLA', "Gr1d");
 defined('SITE_LINK')                 OR define('SITE_LINK', "http://www.gr1d.io/");

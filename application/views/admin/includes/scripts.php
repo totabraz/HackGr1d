@@ -23,6 +23,30 @@
 <script src="<?php echo base_url('dist/vendors-external/AdminLTE/js/pages/dashboard2.js'); ?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url('dist/vendors-external/AdminLTE/js/demo.js'); ?>"></script>
+<script>
+    function hideSpinner() {
+        $('.spinner-area').css({
+            'height': '0',
+            'width': '0',
+            'top': '50%',
+            'left': '50%',
+            'opacity': '0',
+            // 'transform':'scale(0)'
+
+        });
+    }
+
+    function showSpinner() {
+        $('.spinner-area').css({
+            'height': '100vh',
+            'width': '100%',
+            'top': '0',
+            'left': '0',
+            'opacity': '1',
+            // 'transform':'scale(0)'
+
+        });
+    }</script>
 
 <script>
     $(function() {
@@ -65,6 +89,43 @@
 
                     hideSpinner();
                     $("#name_form").val(result.Result[0]['BasicData']['Name']);
+
+
+                },
+                error: function(error) {
+                    console.log("pifou")
+                    hideSpinner();
+                }
+            });
+
+        });
+
+        $('#id_placa').focusout(function() {
+            showSpinner();
+            console.log($('#cpf').val);
+            const $rawBody = {
+                "Datasets": "basic_data",
+                "q": "doc{" + this.value + "}",
+                "AccessToken": ""
+            };
+            $.ajax({
+                url: "https://gateway.gr1d.io/sandbox/unionsolution/renavam/v1/renavam",
+                type: 'GET',
+                headers: {
+                    'x-api-key': '69bf6911-d909-41eb-bde3-aaf50df1ada1',
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    'pstrPlaca': 'NOB8614',
+                    'pstrFormat': 'json',
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function(result) {
+
+                    hideSpinner();
+                    $("#id_chassi").val(result.struct_RespostaRst.Resposta.Chassi);
+                    $("#id_renavam").val(result.struct_RespostaRst.Resposta.Renavam);
+                    console.log(result);
 
 
                 },

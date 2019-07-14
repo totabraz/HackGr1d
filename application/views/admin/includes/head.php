@@ -50,28 +50,4 @@ if (isset($this->session->userdata)) {
     <script src="<?php echo base_url('bower_components/jquery/dist/jquery.min.js'); ?>"></script>
     <!-- axiosw -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-    function hideSpinner() {
-        $('.spinner-area').css({
-            'height': '0',
-            'width': '0',
-            'top': '50%',
-            'left': '50%',
-            'opacity': '0',
-            // 'transform':'scale(0)'
-
-        });
-    }
-
-    function showSpinner() {
-        $('.spinner-area').css({
-            'height': '100vh',
-            'width': '100%',
-            'top': '0',
-            'left': '0',
-            'opacity': '1',
-            // 'transform':'scale(0)'
-
-        });
-    }</script>
 </head>
