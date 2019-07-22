@@ -1,7 +1,7 @@
 
-# gr1dhack
+# HackGr1d
 
-Repositório do app da grid
+Repositório do app desenvolvido no Hackathon da Gr1d (2018)
 
 APIs utilizadas:
 https://gateway.gr1d.io/sandbox/bigdata/bigboost/v1/peoplev2
